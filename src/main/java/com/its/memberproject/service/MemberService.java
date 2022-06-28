@@ -55,12 +55,16 @@ public class MemberService {
            (memberDTO.getMemberEmail(), memberDTO.getMemberPassword());
    if(optionalMemberEntity.isPresent()){
        MemberEntity memberEntity = optionalMemberEntity.get();
-      return MemberDTO.loginCheck(memberEntity);
+      return MemberDTO.findById(memberEntity);
    }else {
        return null;
    }
 
 
 
+    }
+
+    public void deleteById(Long id) {
+        memberRepository.deleteById(id);
     }
 }

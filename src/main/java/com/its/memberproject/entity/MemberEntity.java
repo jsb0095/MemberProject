@@ -13,11 +13,11 @@ public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "memberEmail")
+    @Column(name = "memberEmail",unique = true)
     private String memberEmail;
-    @Column(name = "memberPassword")
+    @Column(name = "memberPassword",nullable = false)
     private String memberPassword;
-    @Column(name ="memberName" )
+    @Column(name ="memberName")
     private String memberName;
     @Column(name = "memberMobile")
     private String memberMobile;

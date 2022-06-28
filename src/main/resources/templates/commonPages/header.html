@@ -12,16 +12,19 @@
         }
     </style>
         <div id="header">
-
-            <div th:if="${session.loginEmail}">
-                <div th:if="${session.loginEmail.toString().equals('admin')}">
+            <span th:text="${session.memberEmail}"></span>
+            <div th:if="${session.memberEmail}">
+                <a href="/board/save">글작성</a>
+                <a href="/board/fidAll">게시글조회</a>
+                <a href="/member/myPage">마이페이지</a>
+                <div th:if="${session.memberEmail.toString().equals('admin@1')}">
                     <a href="#">관리자모드</a>
                 </div>
                 <div>
-                    <a href="#">로그아웃</a>
+                    <a href="/member/logout">로그아웃</a>
                 </div>
             </div>
-            <div th:unless="${session.loginEmail}">
+            <div th:unless="${session.memberEmail}">
                 <a href="/member/saveForm">회원가입</a>
                 <a href="/member/loginForm">로그인</a>
             </div>

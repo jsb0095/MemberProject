@@ -45,10 +45,10 @@ public class MemberDTO {
 
     }
 
-    public static MemberDTO loginCheck(MemberEntity memberEntity) {
-        MemberDTO memberDTO =new MemberDTO();
-        memberDTO.setMemberEmail(memberEntity.getMemberEmail());
-        memberDTO.setMemberPassword(memberEntity.getMemberPassword());
-        return memberDTO;
-    }
+//    public static MemberDTO loginCheck(MemberEntity memberEntity) {
+//        MemberDTO memberDTO =new MemberDTO();
+//        memberDTO.setMemberEmail(memberEntity.getMemberEmail());
+//        memberDTO.setMemberPassword(memberEntity.getMemberPassword());
+//        return memberDTO;
+//    }
 }

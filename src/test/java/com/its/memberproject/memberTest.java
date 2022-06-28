@@ -29,5 +29,16 @@ public class memberTest {
      String testEmail = memberService.findByMemberEmail(memberDTO.getMemberEmail());
         assertThat(testEmail).isEqualTo(memberDTO.getMemberEmail());
     }
+    @Test
+    @Transactional
+    @Rollback(value = true)
+    @DisplayName("member/delete 테스트")
+    public void deleteTest(){
+
+        memberService.deleteById(1L);
+        MemberDTO memberDTO = memberService.findById(1L);
+        assertThat(memberDTO).isNull();
+
+    }
 
 }

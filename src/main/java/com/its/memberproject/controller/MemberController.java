@@ -36,10 +36,10 @@ public class MemberController {
     }
     @PostMapping("/login")
     public String login (@ModelAttribute MemberDTO memberDTO, HttpSession httpSession){
-        httpSession.setAttribute("memberEmail",memberDTO.getMemberEmail());
-        httpSession.setAttribute("id",memberDTO.getId());
       MemberDTO memberDTO1 =  memberService.loginCheck(memberDTO);
       if(memberDTO1 !=null){
+        httpSession.setAttribute("memberEmail",memberDTO1.getMemberEmail());
+        httpSession.setAttribute("id",memberDTO1.getId());
           return "index";
       }else {
           return "member/loginForm";
@@ -49,5 +49,12 @@ public class MemberController {
     public String logout(HttpSession httpSession){
         httpSession.invalidate();
         return "index";
+    }
+    @GetMapping("/myPage")
+    public String myPage(HttpSession httpSession,Model model){
+        Long id= (Long) httpSession.getAttribute("id");
+      MemberDTO memberDTO = memberService.findById(id);
+       model.addAttribute("memberDTO",memberDTO);
+       return "member/myPage";
     }
 }
