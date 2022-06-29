@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter@Setter
@@ -23,6 +25,8 @@ public class MemberEntity {
     private String memberMobile;
     @Column(name = "memberProfileName")
     private String memberProfileName;
+    @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<BoardEntity> boardEntityList = new ArrayList<>();
 
     public static MemberEntity save(MemberDTO memberDTO) {
         MemberEntity memberEntity = new MemberEntity();
@@ -44,4 +48,5 @@ public class MemberEntity {
         memberEntity.setMemberProfileName(memberDTO.getMemberProfileName());
         return memberEntity;
     }
+
 }

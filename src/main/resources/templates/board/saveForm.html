@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<form action="/board/save" method="post" enctype="multipart/form-data">
+    <input type="text" name="boardTitle"  placeholder="boardTitle">
+    <input type="text" name="boardWriter" th:value="${memberDTO.memberEmail}" readonly>
+    <input type="text" name="boardContents" >
+    <input type="file" name="boardFile" placeholder="boardFile">
+    <input type="submit" value="save">
+</form>
+</body>
+</html>
