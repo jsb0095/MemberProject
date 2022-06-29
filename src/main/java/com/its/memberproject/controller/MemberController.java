@@ -87,4 +87,14 @@ public class MemberController {
         memberService.deleteById(id);
         return "redirect:/member/findAll";
     }
+    @PostMapping("/duplicate")
+    public @ResponseBody String duplicate(@RequestParam("memberEmail")String memberEmail){
+     String result =   memberService.duplicate(memberEmail);
+     if(result == null){
+         return "ok";
+     }else {
+         return "no";
+     }
+
+    }
 }

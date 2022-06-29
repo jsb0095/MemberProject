@@ -84,4 +84,15 @@ public class MemberService {
         }
         return memberDTOList;
     }
+
+    public String duplicate(String memberEmail) {
+       Optional<MemberEntity> optionalMemberEntity= memberRepository.findByMemberEmail(memberEmail);
+       if(optionalMemberEntity.isPresent()){
+           MemberEntity memberEntity= optionalMemberEntity.get();
+           return MemberDTO.findByMemberEmail(memberEntity).getMemberEmail();
+       }else {
+           return null;
+       }
+
+    }
 }

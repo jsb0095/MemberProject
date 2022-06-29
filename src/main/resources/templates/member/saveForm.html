@@ -7,7 +7,7 @@
 </head>
 <body>
 <form action="/member/save" method="post" enctype="multipart/form-data">
-    <input type="email" name="memberEmail" placeholder="memberEmail">
+    <input type="email" name="memberEmail"th:onblur="duplicate()" id="idCheck" placeholder="memberEmail">
     <input type="password" name="memberPassword" placeholder="memberPassword">
     <input type="text" name="memberName" placeholder="memberName">
     <input type="tel" name="memberMobile" placeholder="memberMobile">
@@ -15,4 +15,22 @@
     <input type="submit" value="save">
 </form>
 </body>
+<script>
+    function duplicate(){
+        const idCheck= document.getElementById("idCheck").value;
+        $.ajax({
+            type:"post",
+            url:"/member/duplicate",
+            data:{"memberEmail":idCheck},
+            datatype:"text",
+            success:function (result){
+                if (result=="ok"){
+                    alert("사용가능한 아이디입니다.")
+                }else{
+                    alert("이미사용중이거나 탈퇴한 아이디입니다")
+                }
+            }
+        })
+    }
+</script>
 </html>
