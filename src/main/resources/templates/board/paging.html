@@ -16,13 +16,14 @@
     <th scope="col">제목</th>
     <th scope="col">작성시간</th>
     <th scope="col">조회수</th>
+    <th scope="col"></th>
   </tr>
   </thead>
   <tbody>
   <tr th:each="board: ${List}">
     <td th:text="${board.id}"></td>
     <td th:text="${board.boardWriter}"></td>
-    <td><a th:href="@{|/board/${board.id}|}" th:text="${board.boardTitle}">제목</a></td>
+    <td><a th:href="@{|/board/detail/${board.id}|}" th:text="${board.boardTitle}">제목</a></td>
     <td th:text="*{#temporals.format(board.boardCreatedDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
     <td th:text="${board.boardHits}"></td>
   </tr>

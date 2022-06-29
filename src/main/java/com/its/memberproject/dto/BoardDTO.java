@@ -39,6 +39,5 @@ public class BoardDTO {
 
     }
 
-    public static void findAll(BoardEntity boardEntity) {
-    }
+
 }

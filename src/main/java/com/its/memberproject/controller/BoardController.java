@@ -46,4 +46,11 @@ public class BoardController {
         model.addAttribute("endPage", endPage);
         return "board/paging";
     }
+    @GetMapping("/detail/{id}")
+    public String detail(@PathVariable Long id,Model model){
+      BoardDTO boardDTO=  boardService.findById(id);
+        model.addAttribute("boardDTO",boardDTO);
+        return "board/detail";
+    }
+
 }

@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -77,16 +78,18 @@ public class BoardService {
         }
         return boardDTOList;
     }
+
+
+    @Transactional
+    public BoardDTO  findById(Long id) {
+        boardRepository.hitsAdd(id);
+       Optional<BoardEntity> boardEntityOptional = boardRepository.findById(id);
+       if(boardEntityOptional.isPresent()){
+           BoardEntity boardEntity = boardEntityOptional.get();
+          return BoardDTO.findById(boardEntity);
+       }else {
+           return null;
+       }
+    }
 }
-//
-//    public BoardDTO  findById(Long id) {
-//
-//       Optional<BoardEntity> boardEntityOptional = boardRepository.findById(id);
-//       if(boardEntityOptional.isPresent()){
-//           BoardEntity boardEntity = boardEntityOptional.get();
-//          return BoardDTO.findById(boardEntity);
-//       }else {
-//           return null;
-//       }
-//    }
 
