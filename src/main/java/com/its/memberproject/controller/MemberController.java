@@ -55,12 +55,12 @@ public class MemberController {
        model.addAttribute("memberDTO",memberDTO);
        return "member/myPage";
     }
-    @GetMapping("/delete{id}")
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id){
         memberService.deleteById(id);
         return "redirect:/member/logout";
     }
-    @GetMapping("/updateForm{id}")
+    @GetMapping("/updateForm/{id}")
     public String updateForm(@PathVariable Long id,Model model){
        MemberDTO memberDTO = memberService.findById(id);
        model.addAttribute("memberData",memberDTO);
@@ -81,5 +81,10 @@ public class MemberController {
         List<MemberDTO> memberDTOList =memberService.findAll();
         model.addAttribute("memberList",memberDTOList);
         return "member/findAll";
+    }
+    @GetMapping("/adminDelete/{id}")
+    public String userDelete(@PathVariable Long id){
+        memberService.deleteById(id);
+        return "redirect:/member/findAll";
     }
 }

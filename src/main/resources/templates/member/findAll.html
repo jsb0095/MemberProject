@@ -16,6 +16,7 @@
         <th>이름</th>
         <th>전화번호</th>
         <th>프로필</th>
+        <th>삭제</th>
     </tr>
     <tr th:each="member:${memberList}">
 
@@ -25,6 +26,7 @@
         <td th:text="${member.memberName}"></td>
         <td th:text="${member.memberMobile}"></td>
         <td th:text="${member.memberProfileName}"></td>
+        <td><a th:href="@{|/member/adminDelete/${member.id}|}">삭제</a></td>
 
 
 
