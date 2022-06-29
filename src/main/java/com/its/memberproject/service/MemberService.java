@@ -9,6 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -71,5 +73,15 @@ public class MemberService {
     public void update(MemberDTO memberDTO) {
        MemberEntity memberEntity= MemberEntity.update(memberDTO);
        memberRepository.save(memberEntity);
+    }
+
+    public List<MemberDTO> findAll() {
+      List<MemberEntity> memberEntityList = memberRepository.findAll();
+      List<MemberDTO> memberDTOList = new ArrayList<>();
+        for (MemberEntity memberEntity: memberEntityList
+             ) {MemberDTO memberDTO =MemberDTO.findById(memberEntity);
+            memberDTOList.add(memberDTO);
+        }
+        return memberDTOList;
     }
 }

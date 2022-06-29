@@ -19,6 +19,7 @@
                 <a href="/member/myPage">마이페이지</a>
                 <div th:if="${session.memberEmail.toString().equals('admin@1')}">
                     <a href="/member/admin">관리자페이지</a>
+
                 </div>
                 <div>
                     <a href="/member/logout">로그아웃</a>

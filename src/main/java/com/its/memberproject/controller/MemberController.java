@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -70,5 +71,15 @@ public class MemberController {
     public String update(@ModelAttribute MemberDTO memberDTO){
         memberService.update(memberDTO);
     return "redirect:/member/myPage";
+    }
+    @GetMapping("/admin")
+    public String adminPage(){
+        return "member/admin";
+    }
+    @GetMapping("/findAll")
+    public String memberFindAll(Model model){
+        List<MemberDTO> memberDTOList =memberService.findAll();
+        model.addAttribute("memberList",memberDTOList);
+        return "member/findAll";
     }
 }
