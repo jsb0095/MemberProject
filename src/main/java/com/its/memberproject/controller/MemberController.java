@@ -59,4 +59,16 @@ public class MemberController {
         memberService.deleteById(id);
         return "redirect:/member/logout";
     }
+    @GetMapping("/updateForm{id}")
+    public String updateForm(@PathVariable Long id,Model model){
+       MemberDTO memberDTO = memberService.findById(id);
+       model.addAttribute("memberData",memberDTO);
+       return "member/updateForm";
+
+    }
+    @PostMapping("/update")
+    public String update(@ModelAttribute MemberDTO memberDTO){
+        memberService.update(memberDTO);
+    return "redirect:/member/myPage";
+    }
 }

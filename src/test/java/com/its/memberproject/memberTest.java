@@ -25,7 +25,7 @@ public class memberTest {
     @Rollback(value = true)
     @DisplayName("member/login 테스트")
     public void loginTest(){
-      MemberDTO memberDTO = memberService.findById(1L);
+      MemberDTO memberDTO = memberService.findById(2L);
      String testEmail = memberService.findByMemberEmail(memberDTO.getMemberEmail());
         assertThat(testEmail).isEqualTo(memberDTO.getMemberEmail());
     }
@@ -35,10 +35,21 @@ public class memberTest {
     @DisplayName("member/delete 테스트")
     public void deleteTest(){
 
-        memberService.deleteById(1L);
-        MemberDTO memberDTO = memberService.findById(1L);
+        memberService.deleteById(2L);
+        MemberDTO memberDTO = memberService.findById(2L);
         assertThat(memberDTO).isNull();
 
+    }
+    @Test
+    @Transactional
+    @Rollback(value = true)
+    @DisplayName("member/update 테스트")
+    public void updateTest(){
+        MemberDTO memberDTO = memberService.findById(2L);
+       MemberDTO updateDTO = new MemberDTO(memberDTO.getId(),memberDTO.getMemberEmail());
+       updateDTO.setMemberEmail("3L");
+       memberService.findById(updateDTO.getId());
+       assertThat(memberDTO.getMemberEmail()).isNotEqualTo(updateDTO.getMemberEmail());
     }
 
 }

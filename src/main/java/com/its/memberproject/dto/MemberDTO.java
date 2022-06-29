@@ -26,6 +26,15 @@ public class MemberDTO {
 
     }
 
+    public MemberDTO(Long id, String memberEmail) {
+        this.id = id;
+        this.memberEmail = memberEmail;
+    }
+
+    public MemberDTO(String memberEmail) {
+
+    }
+
     public static MemberDTO findById(MemberEntity memberEntity) {
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setId(memberEntity.getId());
