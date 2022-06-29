@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:replace="commonPages/header :: header"></th:block>
+
+<table>
+    <tr>
+        <th>프로필</th>
+        <th>회원번호</th>
+        <th>아이디</th>
+        <th>이름</th>
+        <th>전화번호</th>
+        <th>수정</th>
+        <th>삭제</th>
+
+    </tr>
+    <tr>
+        <td><img th:src="@{|/upload/${memberDTO.memberProfileName}|}" width="100" height="100"> </td>
+        <td th:text="${memberDTO.id}"></td>
+        <td th:text="${memberDTO.memberEmail}"></td>
+        <td th:text="${memberDTO.memberName}"></td>
+        <td th:text="${memberDTO.memberMobile}"></td>
+        <td><input type="button" value="수정" th:onclick="update([[${memberDTO.id}]])"></td>
+        <td><input type="button" value="삭제" th:onclick="drop([[${memberDTO.id}]])"></td>
+
+
+
+
+    </tr>
+</table>
+<script th:inline="javascript">
+    function drop(id){
+       const pwCheck = prompt("비밀번호를 입력해주세요")
+        const userPw = [[${memberDTO.memberPassword}]]
+        if(pwCheck==userPw){
+            location.href="/member/delete"+id;
+        }else {
+            alert("비밀번호가다릅니다")
+        }
+    }
+    function update(id){
+        const pwCheck = prompt("비밀번호를 입력해주세요")
+        const userPw = [[${memberDTO.memberPassword}]]
+        if(pwCheck==userPw){
+            location.href="/member/updateForm"+id;
+        }else {
+            alert("비밀번호가 다릅니다")
+        }
+    }
+</script>
+</body>
+</html>

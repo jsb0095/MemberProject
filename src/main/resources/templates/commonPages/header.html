@@ -5,7 +5,7 @@
     <title>헤더</title>
     <style>
         #header {
-            background-color: #0a53be;
+            background-color: skyblue;
         }
         a {
             color: white;
@@ -18,7 +18,7 @@
                 <a href="/board/fidAll">게시글조회</a>
                 <a href="/member/myPage">마이페이지</a>
                 <div th:if="${session.memberEmail.toString().equals('admin@1')}">
-                    <a href="#">관리자모드</a>
+                    <a href="/member/admin">관리자페이지</a>
                 </div>
                 <div>
                     <a href="/member/logout">로그아웃</a>
