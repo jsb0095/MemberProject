@@ -35,7 +35,7 @@ public class BoardService {
         String profileFileName = profileFile.getOriginalFilename();
         profileFileName = System.currentTimeMillis()+"_"+profileFileName;
         String savePath = "C:\\Springboot_img\\" +profileFileName;
-        if(profileFile.isEmpty()){
+        if(!profileFile.isEmpty()){
             profileFile.transferTo(new File(savePath));
         }
         boardDTO.setBoardFileName(profileFileName);
@@ -90,6 +90,15 @@ public class BoardService {
        }else {
            return null;
        }
+    }
+
+    public void deleteById(Long id) {
+        boardRepository.deleteById(id);
+    }
+
+    public void update(BoardDTO boardDTO) {
+       BoardEntity boardEntity = BoardEntity.update(boardDTO);
+       boardRepository.save(boardEntity);
     }
 }
 

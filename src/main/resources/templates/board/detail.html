@@ -15,16 +15,24 @@
         <th>작성자</th>
         <th>내용</th>
         <th>조회수</th>
+        <b th:if="${boardDTO.boardWriter}==${session.memberEmail}">
+        <th>수정</th>
+        <th>삭제</th>
+        </b>
 
 
     </tr>
     <tr>
-        <td><img th:src="@{|/upload/${boardDTO.boardFileName}|}" width="100" height="100"> </td>
+        <td><img th:src="@{|/upload/${boardDTO.getBoardFileName()}|}" width="100" height="100"> </td>
         <td th:text="${boardDTO.id}"></td>
         <td th:text="${boardDTO.boardTitle}"></td>
         <td th:text="${boardDTO.boardWriter}"></td>
         <td th:text="${boardDTO.boardContents}"></td>
         <td th:text="${boardDTO.boardHits}"></td>
+        <b th:if="${boardDTO.boardWriter}==${session.memberEmail}">
+        <td><a th:href="@{|/board/updateForm/${boardDTO.id}|}">수정</a></td>
+            <td><a th:href="@{|/board/delete/${boardDTO.id}|}">삭제</a></td>
+        </b>
     </tr>
     </table>
 </body>

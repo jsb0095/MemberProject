@@ -17,7 +17,7 @@ public class BoardEntity extends BaseEntity {
     private Long id;
     @Column(name = "boardTitle")
     private String boardTitle;
-    @Column(name = "boardWriter",unique = true)
+    @Column(name = "boardWriter")
     private String boardWriter;
     @Column(name = "boardContents")
     private String boardContents;
@@ -41,5 +41,16 @@ public class BoardEntity extends BaseEntity {
         boardEntity.setMemberEntity(memberEntity);
         return boardEntity;
 
+    }
+
+    public static BoardEntity update(BoardDTO boardDTO) {
+        BoardEntity boardEntity = new BoardEntity();
+        boardEntity.setId(boardDTO.getId());
+        boardEntity.setBoardTitle(boardDTO.getBoardTitle());
+        boardEntity.setBoardWriter(boardDTO.getBoardWriter());
+        boardEntity.setBoardContents(boardDTO.getBoardContents());
+        boardEntity.setBoardHits(boardDTO.getBoardHits());
+        boardEntity.setBoardFileName(boardDTO.getBoardFileName());
+        return boardEntity;
     }
 }
