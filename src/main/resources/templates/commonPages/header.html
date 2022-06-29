@@ -15,7 +15,7 @@
             <span th:text="${session.memberEmail}"></span>
             <div th:if="${session.memberEmail}">
                 <a th:href="@{|/board/saveForm/${session.id}|}">글작성</a>
-                <a href="/board/fidAll">게시글조회</a>
+                <a href="/board/">게시글조회</a>
                 <a href="/member/myPage">마이페이지</a>
                 <div th:if="${session.memberEmail.toString().equals('admin@1')}">
                     <a href="/member/admin">관리자페이지</a>

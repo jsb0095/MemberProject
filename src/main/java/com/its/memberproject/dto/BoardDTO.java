@@ -2,12 +2,14 @@ package com.its.memberproject.dto;
 
 import com.its.memberproject.entity.BoardEntity;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
 public class BoardDTO {
     private Long id;
     private String boardTitle;
@@ -17,6 +19,12 @@ public class BoardDTO {
     private LocalDateTime boardCreatedDate;
     private MultipartFile boardFile;
     private String boardFileName;
+
+    public BoardDTO(Long id, String boardTitle, String boardWriter, String boardContents, int boardHits, LocalDateTime boardCreatedDate, String boardFileName) {
+    }
+
+
+
 
     public static BoardDTO findById(BoardEntity boardEntity) {
         BoardDTO boardDTO = new BoardDTO();
@@ -29,5 +37,8 @@ public class BoardDTO {
         boardDTO.setBoardFileName(boardEntity.getBoardFileName());
         return boardDTO;
 
+    }
+
+    public static void findAll(BoardEntity boardEntity) {
     }
 }
