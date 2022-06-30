@@ -70,8 +70,8 @@ public class BoardController {
         return "redirect:/board/";
     }
     @GetMapping("/search")
-    public String search(@RequestParam("q")String q,Model model){
-       List<BoardDTO> boardDTOList = boardService.search(q);
+    public String search(@RequestParam("q")String q,@RequestParam("q2")String q2,Model model){
+       List<BoardDTO> boardDTOList = boardService.search(q,q2);
         System.out.println(boardDTOList);
        model.addAttribute("boardDTOList",boardDTOList);
         return "board/search";

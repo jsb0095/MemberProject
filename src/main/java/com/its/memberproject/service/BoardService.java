@@ -101,15 +101,31 @@ public class BoardService {
        boardRepository.save(boardEntity);
     }
 
-    public List<BoardDTO> search(String q) {
-     List<BoardEntity> boardEntityList = boardRepository.findByBoardTitleContainingOrderByBoardCreatedDate(q);
-     List<BoardDTO> boardDTOList = new ArrayList<>();
-        for (BoardEntity boardEntity: boardEntityList
-             ) {BoardEntity boardEntity1= boardEntity;
-         BoardDTO boardDTO =   BoardDTO.search(boardEntity1);
-         boardDTOList.add(boardDTO);
+    public List<BoardDTO> search(String q,String q2) {
+        if (q2.equals("boardTitle")) {
+        List<BoardEntity> boardEntityList = boardRepository.findByBoardTitleContaining(q);
+            List<BoardDTO> boardDTOList = new ArrayList<>();
+            for (BoardEntity boardEntity: boardEntityList
+            ) {BoardEntity boardEntity1= boardEntity;
+                BoardDTO boardDTO =   BoardDTO.search(boardEntity1);
+                boardDTOList.add(boardDTO);
+
+            }
+            return boardDTOList;
+        }else {
+            List<BoardEntity> boardEntityList = boardRepository.findByBoardWriterContaining(q);
+            List<BoardDTO> boardDTOList = new ArrayList<>();
+            for (BoardEntity boardEntity : boardEntityList
+            ) {
+                BoardEntity boardEntity1 = boardEntity;
+                BoardDTO boardDTO = BoardDTO.search(boardEntity1);
+                boardDTOList.add(boardDTO);
+
+            }
+            return boardDTOList;
         }
-        return boardDTOList;
+
+
     }
 }
 

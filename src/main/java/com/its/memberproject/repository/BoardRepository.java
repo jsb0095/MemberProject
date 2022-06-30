@@ -16,5 +16,6 @@ public interface BoardRepository extends JpaRepository<BoardEntity,Long> {
     void hitsAdd(Long id);
 
 
-    List<BoardEntity> findByBoardTitleContainingOrderByBoardCreatedDate(String q);
+    List<BoardEntity> findByBoardTitleContaining(String q);
+    List<BoardEntity> findByBoardWriterContaining(String q);
 }

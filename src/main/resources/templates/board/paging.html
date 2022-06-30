@@ -7,8 +7,15 @@
 <body>
 <th:block th:replace="commonPages/header :: header"></th:block>
 <h2>회원제 게시판</h2>
-<form action="/board/search">
-  <input class="input-group" type="text" name="q"><input class="input-group" type="submit" value="검색">
+<form action="/board/search" method="get">
+  <input  type="text" name="q">
+  <select name="q2">
+    <option value="">선택</option>
+    <option value="boardTitle">제목</option>
+    <option value="boardWriter">작성자</option>
+  </select>
+  <input  type="submit" value="검색">
+
 </form>
 <table class="table table-hover">
 
