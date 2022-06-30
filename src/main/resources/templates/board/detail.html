@@ -15,11 +15,10 @@
         <th>작성자</th>
         <th>내용</th>
         <th>조회수</th>
-        <b th:if="${boardDTO.boardWriter}==${session.memberEmail}">
+        <b th:if="${#strings.equals(session.memberEmail,boardDTO.boardWriter)} or ${session.memberEmail.toString().equals('admin@1')}">
         <th>수정</th>
         <th>삭제</th>
         </b>
-
 
     </tr>
     <tr>
@@ -29,7 +28,7 @@
         <td th:text="${boardDTO.boardWriter}"></td>
         <td th:text="${boardDTO.boardContents}"></td>
         <td th:text="${boardDTO.boardHits}"></td>
-        <b th:if="${boardDTO.boardWriter}==${session.memberEmail}">
+        <b th:if="${#strings.equals(session.memberEmail,boardDTO.boardWriter)} or ${session.memberEmail.toString().equals('admin@1')}">
         <td><a th:href="@{|/board/updateForm/${boardDTO.id}|}">수정</a></td>
             <td><a th:href="@{|/board/delete/${boardDTO.id}|}">삭제</a></td>
         </b>

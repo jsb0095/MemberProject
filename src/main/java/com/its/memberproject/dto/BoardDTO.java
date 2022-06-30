@@ -40,4 +40,15 @@ public class BoardDTO {
     }
 
 
+    public static BoardDTO search(BoardEntity boardEntity1) {
+        BoardDTO boardDTO = new BoardDTO();
+        boardDTO.setId(boardEntity1.getId());
+        boardDTO.setBoardTitle(boardEntity1.getBoardTitle());
+        boardDTO.setBoardWriter(boardEntity1.getBoardWriter());
+        boardDTO.setBoardContents(boardEntity1.getBoardContents());
+        boardDTO.setBoardHits(boardEntity1.getBoardHits());
+        boardDTO.setBoardCreatedDate(boardEntity1.getBoardCreatedDate());
+        boardDTO.setBoardFileName(boardEntity1.getBoardFileName());
+        return boardDTO;
+    }
 }

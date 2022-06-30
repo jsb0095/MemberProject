@@ -7,9 +7,11 @@
 <body>
 <th:block th:replace="commonPages/header :: header"></th:block>
 <h2>회원제 게시판</h2>
-
+<form action="/board/search">
+  <input class="input-group" type="text" name="q"><input class="input-group" type="submit" value="검색">
+</form>
 <table class="table table-hover">
-  <thead>
+
   <tr>
     <th scope="col">글번호</th>
     <th scope="col">글쓴이</th>
@@ -18,8 +20,6 @@
     <th scope="col">조회수</th>
     <th scope="col"></th>
   </tr>
-  </thead>
-  <tbody>
   <tr th:each="board: ${List}">
     <td th:text="${board.id}"></td>
     <td th:text="${board.boardWriter}"></td>
@@ -27,7 +27,6 @@
     <td th:text="*{#temporals.format(board.boardCreatedDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
     <td th:text="${board.boardHits}"></td>
   </tr>
-  </tbody>
 </table>
 
 <!--
