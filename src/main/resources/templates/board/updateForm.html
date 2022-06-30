@@ -15,9 +15,10 @@
     <tr>
         <form action="/board/update" method="post" enctype="multipart/form-data">
             <input type="file" name="boardFile" placeholder="boardFile">
+            <input type="text" name="id"  th:value="${boardDTO.id}" hidden>
             <input type="text" name="boardTitle"  th:value="${boardDTO.boardTitle}">
             <input type="text" name="boardWriter" th:value="${boardDTO.boardWriter}" readonly>
-            <input type="text" name="boardContents" th:value="${boardDTO.boardContents}" >
+            <input type="text" name="boardContents" th:value="${boardDTO.boardContents}">
             <input type="submit" value="save">
         </form>
     </tr>

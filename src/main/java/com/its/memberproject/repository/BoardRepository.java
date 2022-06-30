@@ -3,6 +3,7 @@ package com.its.memberproject.repository;
 
 import com.its.memberproject.entity.BaseEntity;
 import com.its.memberproject.entity.BoardEntity;
+import com.its.memberproject.entity.CommentEntity;
 import com.its.memberproject.entity.MemberEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -17,5 +18,8 @@ public interface BoardRepository extends JpaRepository<BoardEntity,Long> {
 
 
     List<BoardEntity> findByBoardTitleContaining(String q);
+
     List<BoardEntity> findByBoardWriterContaining(String q);
 }
+
+

@@ -7,6 +7,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter@Setter
@@ -14,23 +16,25 @@ import java.time.LocalDateTime;
 public class BoardEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "board_id")
     private Long id;
-    @Column(name = "boardTitle")
+    @Column
     private String boardTitle;
-    @Column(name = "boardWriter")
+    @Column
     private String boardWriter;
-    @Column(name = "boardContents")
+    @Column
     private String boardContents;
-    @Column(name = "boardHits")
+    @Column
     private int boardHits;
 
-    @Column(name = "boardFileName",length = 1000)
+    @Column
     private String boardFileName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
-
+    @OneToMany(mappedBy = "boardEntity",cascade = CascadeType.ALL,orphanRemoval = true ,fetch=FetchType.LAZY)
+     List<CommentEntity> commentEntityList = new ArrayList<>();
     public static BoardEntity save(BoardDTO boardDTO,MemberEntity memberEntity) {
         BoardEntity boardEntity = new BoardEntity();
         boardEntity.setBoardTitle(boardDTO.getBoardTitle());
@@ -43,7 +47,7 @@ public class BoardEntity extends BaseEntity {
 
     }
 
-    public static BoardEntity update(BoardDTO boardDTO) {
+    public static BoardEntity update(BoardDTO boardDTO,MemberEntity memberEntity) {
         BoardEntity boardEntity = new BoardEntity();
         boardEntity.setId(boardDTO.getId());
         boardEntity.setBoardTitle(boardDTO.getBoardTitle());
@@ -51,6 +55,7 @@ public class BoardEntity extends BaseEntity {
         boardEntity.setBoardContents(boardDTO.getBoardContents());
         boardEntity.setBoardHits(boardDTO.getBoardHits());
         boardEntity.setBoardFileName(boardDTO.getBoardFileName());
+        boardEntity.setMemberEntity(memberEntity);
         return boardEntity;
     }
 }

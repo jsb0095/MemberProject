@@ -14,19 +14,22 @@ import java.util.List;
 public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_id")
     private Long id;
-    @Column(name = "memberEmail",unique = true)
+    @Column(unique = true)
     private String memberEmail;
-    @Column(name = "memberPassword",nullable = false)
+    @Column(nullable = false)
     private String memberPassword;
-    @Column(name ="memberName")
+    @Column
     private String memberName;
-    @Column(name = "memberMobile")
+    @Column
     private String memberMobile;
-    @Column(name = "memberProfileName")
+    @Column
     private String memberProfileName;
     @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<BoardEntity> boardEntityList = new ArrayList<>();
+    @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<CommentEntity> commentEntityList = new ArrayList<>();
 
     public static MemberEntity save(MemberDTO memberDTO) {
         MemberEntity memberEntity = new MemberEntity();

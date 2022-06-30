@@ -2,8 +2,10 @@ package com.its.memberproject.controller;
 
 import com.its.memberproject.common.PagingConst;
 import com.its.memberproject.dto.BoardDTO;
+import com.its.memberproject.dto.CommentDTO;
 import com.its.memberproject.dto.MemberDTO;
 import com.its.memberproject.service.BoardService;
+import com.its.memberproject.service.CommentService;
 import com.its.memberproject.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -23,6 +25,7 @@ import java.util.List;
 public class BoardController {
     private final BoardService boardService;
     private final MemberService memberService;
+    private final CommentService commentService;
     @GetMapping("/saveForm/{id}")
     public String boardSave(@PathVariable Long id, Model model){
       MemberDTO memberDTO = memberService.findById(id);
@@ -37,8 +40,6 @@ public class BoardController {
     @GetMapping
     public String paging(@PageableDefault(page = 1) Pageable pageable, Model model){
         Page<BoardDTO> boardDTOPage = boardService.paging(pageable);
-          List<BoardDTO> boardDTOList =  boardService.findAll();
-          model.addAttribute("List",boardDTOList);
         model.addAttribute("boardList",boardDTOPage);
         int startPage = (((int) (Math.ceil((double) pageable.getPageNumber() / PagingConst.BLOCK_LIMIT))) - 1) * PagingConst.BLOCK_LIMIT + 1;
         int endPage = ((startPage + PagingConst.BLOCK_LIMIT - 1) < boardDTOPage.getTotalPages()) ? startPage + PagingConst.BLOCK_LIMIT - 1 : boardDTOPage.getTotalPages();
@@ -49,6 +50,8 @@ public class BoardController {
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable Long id,Model model){
       BoardDTO boardDTO=  boardService.findById(id);
+          List<CommentDTO> commentDTOList=  commentService.findAll(id);
+          model.addAttribute("commentList",commentDTOList);
         model.addAttribute("boardDTO",boardDTO);
         return "board/detail";
     }

@@ -38,7 +38,7 @@
        const pwCheck = prompt("비밀번호를 입력해주세요")
         const userPw = [[${memberDTO.memberPassword}]]
         if(pwCheck==userPw){
-            location.href="/member/delete"+id;
+            location.href="/member/delete/"+id;
         }else {
             alert("비밀번호가다릅니다")
         }
@@ -47,7 +47,7 @@
         const pwCheck = prompt("비밀번호를 입력해주세요")
         const userPw = [[${memberDTO.memberPassword}]]
         if(pwCheck==userPw){
-            location.href="/member/updateForm"+id;
+            location.href="/member/updateForm/"+id;
         }else {
             alert("비밀번호가 다릅니다")
         }

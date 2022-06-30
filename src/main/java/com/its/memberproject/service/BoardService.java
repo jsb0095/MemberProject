@@ -97,7 +97,8 @@ public class BoardService {
     }
 
     public void update(BoardDTO boardDTO) {
-       BoardEntity boardEntity = BoardEntity.update(boardDTO);
+        MemberEntity memberEntity=  memberRepository.findByMemberEmail(boardDTO.getBoardWriter()).get();
+       BoardEntity boardEntity = BoardEntity.update(boardDTO,memberEntity);
        boardRepository.save(boardEntity);
     }
 

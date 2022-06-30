@@ -10,7 +10,7 @@
 <table>
     <tr>
         <th>사진</th>
-        <th>회원번호</th>
+        <th>글번호</th>
         <th>제목</th>
         <th>작성자</th>
         <th>내용</th>
@@ -34,5 +34,62 @@
         </b>
     </tr>
     </table>
+
+    <input id="commentWriter" th:value="${session.memberEmail}"readonly>
+    <input id="commentContents">
+    <input type="button" th:onclick="commentSave()" value="댓글작성">
+<div id="ok">
+    <table>
+    <tr>
+       <th>댓글번호</th>
+       <th>댓글작성자</th>
+       <th>댓글내용</th>
+       <th>댓글작성시간</th>
+
+    </tr>
+        <tr th:each="comment:${commentList}">
+            <td th:text="${comment.id}"></td>
+            <td th:text="${comment.commentWriter}"></td>
+            <td th:text="${comment.commentContents}"></td>
+            <td th:text="${comment.commentCreatedDate}"></td>
+        </tr>
+    </table>
+</div>
 </body>
+<script th:inline="javascript">
+    function commentSave(){
+        const commentWriter = document.getElementById("commentWriter").value;
+        const commentContents = document.getElementById("commentContents").value;
+        const boardId= [[${boardDTO.id}]];
+        const ok = document.getElementById("ok");
+
+        $.ajax({
+            type:"post",
+            url:"/comment/save",
+            data:{"boardId":boardId,"commentWriter":commentWriter,"commentContents":commentContents},
+            dataType:"json",
+            success:function (commentDTO1){
+                let output = "<table>\n" +
+                    "    <tr>\n" +
+                    "       <th>댓글번호</th>\n" +
+                    "       <th>댓글작성자</th>\n" +
+                    "       <th>댓글내용</th>\n" +
+                    "       <th>댓글작성시간</th></tr>\n";
+                for (let i in commentDTO1) {
+                    output += "<tr>"+
+                    "            <td>" + commentDTO1[i].id+"</td>\n" +
+                    "            <td>" + commentDTO1[i].commentWriter+"</td>\n" +
+                    "            <td>" + commentDTO1[i].commentContents+"</td>\n" +
+                    "            <td>" + commentDTO1[i].commentCreatedDate+"</td>\n" +
+                    "        </tr>\n"
+                }
+
+                    output+="    </table>";
+                ok.innerHTML=output;
+                document.getElementById("commentContents").value="";
+            }
+        });
+
+    }
+</script>
 </html>
