@@ -5,6 +5,7 @@ import com.its.memberproject.entity.MemberEntity;
 import com.its.memberproject.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -70,7 +71,15 @@ public class MemberService {
         memberRepository.deleteById(id);
     }
 
-    public void update(MemberDTO memberDTO) {
+    public void update(MemberDTO memberDTO) throws IOException {
+        MultipartFile profileFile = memberDTO.getMemberProfileFile();
+        String profileFileName = profileFile.getOriginalFilename();
+        profileFileName = System.currentTimeMillis()+"_"+profileFileName;
+        String savePath = "C:\\Springboot_img\\" +profileFileName;
+        if(!profileFile.isEmpty()){
+            profileFile.transferTo(new File(savePath));
+        }
+        memberDTO.setMemberProfileName(profileFileName);
        MemberEntity memberEntity= MemberEntity.update(memberDTO);
        memberRepository.save(memberEntity);
     }
@@ -93,6 +102,12 @@ public class MemberService {
        }else {
            return null;
        }
+
+    }
+    @Transactional
+    public MemberDTO searchMemberById(long parseLong) {
+       MemberEntity memberEntity= memberRepository.searchMemberById(parseLong);
+       return MemberDTO.searchMemberById(memberEntity);
 
     }
 }

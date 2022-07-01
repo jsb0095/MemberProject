@@ -96,7 +96,15 @@ public class BoardService {
         boardRepository.deleteById(id);
     }
 
-    public void update(BoardDTO boardDTO) {
+    public void update(BoardDTO boardDTO) throws IOException {
+        MultipartFile profileFile = boardDTO.getBoardFile();
+        String profileFileName = profileFile.getOriginalFilename();
+        profileFileName = System.currentTimeMillis()+"_"+profileFileName;
+        String savePath = "C:\\Springboot_img\\" +profileFileName;
+        if(!profileFile.isEmpty()){
+            profileFile.transferTo(new File(savePath));
+        }
+        boardDTO.setBoardFileName(profileFileName);
         MemberEntity memberEntity=  memberRepository.findByMemberEmail(boardDTO.getBoardWriter()).get();
        BoardEntity boardEntity = BoardEntity.update(boardDTO,memberEntity);
        boardRepository.save(boardEntity);

@@ -68,7 +68,7 @@ public class MemberController {
 
     }
     @PostMapping("/update")
-    public String update(@ModelAttribute MemberDTO memberDTO){
+    public String update(@ModelAttribute MemberDTO memberDTO) throws IOException {
         memberService.update(memberDTO);
     return "redirect:/member/myPage";
     }

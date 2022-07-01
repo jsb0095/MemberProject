@@ -1,10 +1,12 @@
 package com.its.memberproject.dto;
 
 import com.its.memberproject.entity.MemberEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 @Data
+@AllArgsConstructor
 public class MemberDTO {
     private Long id;
     private String memberEmail;
@@ -52,6 +54,12 @@ public class MemberDTO {
         memberDTO.setMemberEmail(memberEntity.getMemberEmail());
         return memberDTO;
 
+    }
+
+    public static MemberDTO searchMemberById(MemberEntity memberEntity) {
+        MemberDTO memberDTO =new MemberDTO();
+        memberDTO.setId(memberEntity.getId());
+        return memberDTO;
     }
 
 //    public static MemberDTO loginCheck(MemberEntity memberEntity) {

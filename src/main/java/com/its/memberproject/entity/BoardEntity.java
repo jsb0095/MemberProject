@@ -33,8 +33,9 @@ public class BoardEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
-    @OneToMany(mappedBy = "boardEntity",cascade = CascadeType.ALL,orphanRemoval = true ,fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "boardEntity",cascade = CascadeType.REMOVE,orphanRemoval = true ,fetch=FetchType.LAZY)
      List<CommentEntity> commentEntityList = new ArrayList<>();
+
     public static BoardEntity save(BoardDTO boardDTO,MemberEntity memberEntity) {
         BoardEntity boardEntity = new BoardEntity();
         boardEntity.setBoardTitle(boardDTO.getBoardTitle());

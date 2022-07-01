@@ -26,9 +26,9 @@ public class MemberEntity {
     private String memberMobile;
     @Column
     private String memberProfileName;
-    @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<BoardEntity> boardEntityList = new ArrayList<>();
-    @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<CommentEntity> commentEntityList = new ArrayList<>();
 
     public static MemberEntity save(MemberDTO memberDTO) {
